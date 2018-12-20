@@ -19,7 +19,7 @@ XPath expressions return a list of nodes.  Depending on the expression, there co
 3- select attribute nodes (in this case it would not return any node, because document node cannot have child attributes)
 /@*
 
-4- select all nodes except attribute nodes (in this case would return one node that is the opening element of the XML document)
+4- select all nodes except attribute nodes (child nodes of the document node.  Could contain: the XML declaration, text node representing new line, the top-level element)
 /node()
 
 
