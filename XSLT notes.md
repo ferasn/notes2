@@ -39,6 +39,8 @@ There is also a built-in template rule for text and attribute nodes that copies 
 <xsl:template match="text()|@*">
   <xsl:value-of select="."/>
 </xsl:template>
+In XSLT "<xsl:value-of>" converts the resluted text to a text node.  So, the above template takes the text of a text node and again produce a text node.  Also, takes the text from of an attribute and produce a text node out of it. So, basically with the above template an attriute is converted into a text node.
+
 The built-in template rule for processing instructions and comments is to do nothing.
 
 <xsl:template match="processing-instruction()|comment()"/>
@@ -86,7 +88,14 @@ The <xsl:apply-templates /> inside the <xsl:copy> element selects all child node
 	<b>xyz</b>
 </a>
 
-All child text nodes are included in the output XML.  This is because text nodes that do not have a matching template in XSLT will match the built-in template for text and attribute nodes <xsl:template match="text()|@*">.  This template copies the text to the output XML.  One interesting observation is that the output XML does not have the attribute "d" from original XML, although the built-in template <xsl:template match="text()|@*"> matches attribute nodes.  This is becuase the node set resulted from <xsl:apply-templates /> includes all child nodes and attribute nodes are not considered children and only those nodes in the set will be matched against avaialable templates.  To include attribute nodes, the <xsl:apply-templates /> has to be changed to <xsl:apply-templates select = "node() | @*" />
+All child text nodes are included in the output XML.  This is because text nodes that do not have a matching template in XSLT will match the built-in template for text and attribute nodes <xsl:template match="text()|@*">.  This template copies the text to the output XML.  
+
+One interesting observation is that the output XML does not have the attribute "d" from original XML, although the built-in template <xsl:template match="text()|@*"> matches attribute nodes.  This is becuase the node set resulted from <xsl:apply-templates /> includes all child nodes and attribute nodes are not considered children and only those nodes in the set will be matched against avaialable templates.  To include attribute nodes, the <xsl:apply-templates /> has to be changed to <xsl:apply-templates select = "node() | @*" />.  Doing so will produce this XML:
+
+<?xml version="1.0" encoding="UTF-8"?><a>abc
+	<b>xyz</b>
+</a>
+That is becuase the attribute "d" will be matched with default template for text and attribute nodes.  That template takes text of the attribute and produces a text node. The text node "abc" and the next text node of "new line + spaces" will be merged into one text node in the resluting tree.  When two adjacent text nodes occur as a result of XSLT transformation, they are merged in one text node. To preserve the attribute node "d" in the output XML, the <xsl:template match="*"> should change to <xsl:template match="* | @*"> to match attribute nodes and therefore attribute node will be copied to output XML by <xsl:copy>.
 
 To prevent text nodes from appearing in the output XML, one can override the built-in template with custom template that matches text nodes but doe not do anything:  <xsl:template match="text()" /> 
 
