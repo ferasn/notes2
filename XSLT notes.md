@@ -119,3 +119,14 @@ The above XSLT can also be simplified to remove the tempalte that matches docume
 	</xsl:template>
 </xsl:stylesheet>
 
+
+XSLT Branching and Control :
+============================
+
+<xsl:if test="count(zone) > 2">
+  <xsl:text>Applicable zones: </xsl:text>
+  <xsl:apply-templates select="zone"/>
+</xsl:if>
+
+Note: In the above XPath expression we used the character > in the value of the test attribute. If you need to use the less-than operator (<), you’ll have to use the &lt; entity. The same holds true for the less-than-or-equal operator (<=).
+

@@ -3,8 +3,8 @@ https://www.ibm.com/developerworks/library/x-entities/index.html
 
 There are 5 pre-defined entity references in XML:
 
-&lt;	<	less than
-&gt;	>	greater than
+&lt;	<	less than  (for <= use &lt;= )
+&gt;	>	greater than (for >= use &gt;= )
 &amp;	&	ampersand 
 &apos;	'	apostrophe
 &quot;	"	quotation mark
@@ -21,7 +21,7 @@ Types of XML Nodes:
 element,
 attribute, 
 text,
-processing-instruction, 
+processing-instruction (PI), 
 comment, 
 document
 namespace : a namespace node cannot be selected by an XPath expression. However, any namespace declared in an element is considered a child of that element.  In fact it is also considered a child of all elements nested under that element.  So, if you use <copy-of> in XSLT on an element that has namespace declarations or on any of its child elements, the namespace declarations will be copied as well, because they are considered children of the element node. It make sence that XML declaration is considered child of every element in the heirarchy starting from the elements where they are declared becuase their scope cover all these elements.
@@ -32,7 +32,11 @@ namespace : a namespace node cannot be selected by an XPath expression. However,
 </a>
 
 
-* The result of XPath expressions is a set of nodes.  The set could contain one or more nodes.
+* The result of XPath expressions is:
+ 1- node-set (an unordered collection of nodes without duplicates)
+ 2- boolean (true or false)
+ 3- number (a floating-point number)
+ 4- string (a sequence of UCS characters)
 
 * Attribute nodes: an attribute node has a parent node but it is not a child of its parent.  This is why if you select the child nodes of an element node that has an attribute, the attribute node will not be in the node set.  to select the attribute node you need to explicity select it /@attribName
 
