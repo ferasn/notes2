@@ -60,6 +60,15 @@ againts a number:
 <xsl:value-of select="item[position()=$n]"/>
 In this case, the select expression will result in a node-set that contains the second element only.
 
+--- Try this in Xalan:
+<xsl:variable name="n">
+  <xsl:text>2</xsl:text>
+</xsl:variable>
+It should be similar to <xsl:variable name="n" select="2">
+
+
+--- in Safari XSLT book check section "Parameters" and the warning box
+
 
 
 
