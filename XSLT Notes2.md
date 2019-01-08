@@ -1,5 +1,6 @@
 XPath types:
-* Result Tree fragements: Type introduced by XSLT.  It is created with xslt variables.  
+* Result Tree fragements: (Take the description from XSLT 1.0 pocket reference book)
+Type introduced by XSLT.  It is created with xslt variables.  
 A variable may be bound to a result tree fragment instead of one of the four basic XPath data-types (string, number, boolean, node-set).
 A result tree fragement type is like a node-set that contains just a single root node except that you cannot write XPath
 location path expressions on values of this type (/, //, and [] operators are not permitted).
@@ -68,6 +69,8 @@ It should be similar to <xsl:variable name="n" select="2">
 
 
 --- in Safari XSLT book check section "Parameters" and the warning box
+
+--- There is a mistake in the XSLT template priority notes I have written.  Take the correct one from XSLT 1.0 pocket reference book
 
 
 
