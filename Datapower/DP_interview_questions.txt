@@ -1,0 +1,61 @@
+* Domains:
+	- CPU, Memory resource allocation
+
+* File System:
+	- config, export, local, store, temporary, cert
+	
+* Backup, export configuration, deployment policy, Disaster recovery mode, secure backup
+	
+* services:
+	- Multi-protocol gateway, WS Proxy
+	- static backend, dynamic backend
+	- Processing policy.  Rules: request, response, both, error
+	- front side handler
+	
+* XML Manager:
+	- What, why.
+	- user agent
+	- Document cache.  Renew document (flush).
+	- Stylesheet cache.  Flush when?
+	- Load balancer how to configure?
+
+* Security:
+	- PKI, CAs, public/private keys. Symmetric/Asymmetric encryption.
+	- SSL (TLS versions), Digital signature
+	- SSL Client Profile, SSL Server Profile, Crypto validation credentials, Crypto identification credentials, SSL Proxy Profile (Direction: forward, reverse)
+	- Authentication in API
+	- AAA
+	- SAML, OAuth
+
+* Logging:
+	- Log management
+	- Log target, Event filter, object filter
+	- Auxiliary Storage
+	
+* Troubleshooting
+
+* WebSphere MQ:
+	- High availability
+	- MQ Queue Manager object, MQ Queue manager group object
+
+* SLM:
+	- Throughput, response time, availability
+
+* WSDL:
+	- Sections: types, message, portType, binding, service
+	
+* XSLT:
+	- xsl:template match, xsl:apply-templates, xsl:call-template
+	- xsl:copy, xsl:copy-of
+	- xsl:value-of
+
+* XPath
+	- select an element whith specific child element
+	- select all elements
+	
+* IIB:
+	- Trees:
+		* Root: Properties, MQMD, headers, Body
+		* Environment
+		* Local Envrionment
+		* Exception List
