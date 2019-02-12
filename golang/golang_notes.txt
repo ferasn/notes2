@@ -1,0 +1,3 @@
+* A string is an immutable slice of bytes.  slice operators [:] on string produce another string.
+* using a byte slice type conversion []byte(stringValue), creates a new underlying array that is a copy of the string.  This is in order not to break the immutability of the string.
+* for .. range behaves differently for string and []byte.
