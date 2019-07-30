@@ -1,0 +1,9 @@
+* A process instance that is blocked doing executing a synchrounous invocation activity (HTTP call on import) cannot be terminated until
+the activity is completed either successfully or with failure.  Trying to force terminate the instance, the BPC will report an error that
+the instance failed to terminate.
+
+* In failed events: 
+Exception reason: CWSIK0035E: A message cannot be delivered to destination sca/Reconciliation on messaging engine MECluster.000-BPM.PServer_DE.Bus because it has rolled back more times than its redelivery threshold.
+
+This exception means that there is a problem with the messaging engine preventing the message from being put on the destination queue
+(sca/Reconciliation).  Look at messaging engine logs to find out the problem.
