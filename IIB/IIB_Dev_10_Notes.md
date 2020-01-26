@@ -114,4 +114,4 @@ Unit 4: Connecting to IBM MQ
 * Behaviour if BackoutCount exceed the "backout threshold" on MQInput Node:
   * If the failure terminal is not connected, the message is put in the backout queue.
   * If the failure terminal is connected, the message is propogated to the failure path. If an error occurs in the failure terminal path, the message is retried until the "backout count" > 2 * "back threshold", then the message is put in the backout queue. (Explanatin: By the time the message is propogated to the failure terminal, the "backout count" has reached the "backout threshold", then the message is tried again as many as "backout threshold" and this is where 2 * "backout threshold" came from as the condition to check.
-  * Note: the above holds if the message started a flow transaction. Otherwise, the message is discarded it an error occurs and the error could not be handled.
+  * Note: the above holds if the message started a flow transaction (if transaction mode is 'Yes' or transaction mode is 'Automatic' and the message is persistent). Otherwise, the message is discarded it an error occurs and the error could not be handled.
