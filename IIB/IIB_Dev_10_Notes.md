@@ -48,6 +48,11 @@ These notes are a summary of IIB Dev 10 course.
   * Configurable: You can override values in the "deployment file (BAR)" or at "run time".
   * Promoted: Elevates the property to the message flow level instead of the individual node level; the property value can then be changed at the message flow level. Also, in the "deployment file (BAR)" or at "run time".
 * Patterns: Catalog of IBM Integration Bus patterns is available on OT4I GitHub Pattern Repository.
-* Flow exerciser: 
-   - Show the path that each message took.  View the structure and content of the logical message tree at any point in a message flow. Save recorded messages for replay.  It is like a GUI for flow trace.
-   - Noe: The Flow exerciser cannot be used with a message flow that is defined in a REST API. (why?)
+* Flow exerciser: Show the path that each message took.  View the structure and content of the logical message tree at any point in a message flow. Save recorded messages for replay.
+* BAR file creation and deployment:
+  * When you add a message flow to a BAR file, you can add the flow as a .msgflow file, or as a compiled message flow (defined in a .cmf file). You cannot add the same message flow to a BAR file as both a .cmf file and a .msgflow file.
+  * Deploying all the resources in the compiled form requires that all the subflows are implemented in .msgflow files. As a result, all the flow, subflow, and ESQL code is in-lined into the parent .cmf file. This method does not allow the same flexibility as the source deployment, but it does provide an unambiguous runtime behavior.
+  * If the BAR file contains a mixture of resources that are compiled and resources that are not compiled, you might see unexpected results.
+  * The BAR file contains the broker.xml file. This file is called the deployment descriptor. This file, in XML format, is in the META-INF folder of the .zip file and can be modified by using a text editor or shell script.
+  * When creating a new bar file in the toolkit, the BAR file is created in the "BarFiles" project by default. The default can be changed in preferences.
+
