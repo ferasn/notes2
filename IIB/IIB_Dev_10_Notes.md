@@ -57,3 +57,9 @@ These notes are a summary of IIB Dev 10 course.
   * When creating a new bar file in the toolkit, the BAR file is created in the "BarFiles" project by default. The default can be changed in preferences.
   * If you elect to include source files in the BAR file (by selecting the option "Add workspace project source files" in the prepare tab), these resources are stored in a separate folder, which is named src in the bar file.
 * The IBM Integration web user interface is enabled and assigned to port 4414 by default.
+
+Unit 4: Connecting to IBM MQ
+* MQInput, MQOutput, MQGet, and MQReply nodes can connect to local or remote queue managers.
+* MQInput nodes can receive messages from multiple queues on multiple queue managers.
+* Globally coordinated transaction control requires that MQInput and MQOutput nodes use same "local" queue manager. This queue manager is the global transaction manager, and no other IBM MQ resources can be used in the message flow.
+* You can specify a connection from an IBM MQ node to a specific local or remote queue manager by using connection properties on the node, including the destination queue manager name, host name, port, and channel. Alternatively, you can use an "MQEndpoint policy" to control the values of IBM MQ node connection properties at run time, or to specify an IBM MQ broker for event publication.
