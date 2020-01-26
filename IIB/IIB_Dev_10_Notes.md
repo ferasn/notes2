@@ -103,5 +103,19 @@ Unit 4: Connecting to IBM MQ
   * HTTP proxy servlet
   * High availability configurations
   * Using accounting and statistics by using the web user interface and IBM MQ
-  
-    
+* Creating a default QM for an integration node:
+  * User must be "mqm" and "mqbrkrs" operating system groups
+  * On Linux and UNIX, ensure that the command environment has been initialized, by running the "mqsiprofile" command.
+  * On Linux and UNIX systems, run the "setmqenv" command to configure the IBM MQ environment where you want the integration node to run.
+  * Creates an integration node with a default queue manager (it does not create the queue manager):
+    - mqsicreatebroker IntNodeName -q QmgrName
+  * Changes integration node definition to add a default queue manager.  You must stop the integration node before you enter the "mqsichangebroker" command, and restart the integration node for the changes to take effect:
+    - mqsichangebroker IntNodeName -q QmgrName
+  * In addition to message flow nodes that require system queues to function, the default queue manager is also used by default for IBM MQ processing in the message flow if no queue manager is specified on the message flow node.
+* Creating the IBM integration bus system queues:
+  1. Go to directory: iib_install_dir/server/sample/wmq
+  2. Run script: ./iib_createqueues.sh QmgrName
+* Behaviour if BackoutCount exceed the "backout threshold" on MQInput Node:
+  * If the failure terminal is not connected, the message is put in the backout queue.
+  * If the failure terminal is connected, the message is propogated to the failure path. If an error occurs in the failure terminal path, the message is retried until the "backout count" > 2 * "back threshold", then the message is put in the backout queue. (Explanatin: By the time the message is propogated to the failure terminal, the "backout count" has reached the "backout threshold", then the message is tried again as many as "backout threshold" and this is where 2 * "backout threshold" came from as the condition to check.
+  * Note: the above holds if the message started a flow transaction. Otherwise, the message is discarded it an error occurs and the error could not be handled.
