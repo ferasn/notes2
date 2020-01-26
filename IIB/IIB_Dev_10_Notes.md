@@ -83,10 +83,6 @@ Unit 4: Connecting to IBM MQ
   * Node properties that controls the shape of the output message: "Generate Mode", "Copy Message", "Copy local environment", "Output data location" and "Result data location".
   * See page 174 of student notes and knowledge center: https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac20806_.html
  
-* Flexible IBM MQ Topologies:
-  * Single integration node can be connected to a single queue manager
-  * Multiple integration nodes can be connected to a single queue manager
-  * Queue manager can be local or remote from integration node
 * Some IBM Integration Bus features and implementations require IBM MQ server on the same system as the integration node, and that you specify a queue manager on the integration node:
   * z/OS implementations: on z/OS only local queue managers are supported for IIB.
   * Record and replay
