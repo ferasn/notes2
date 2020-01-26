@@ -48,4 +48,6 @@ These notes are a summary of IIB Dev 10 course.
   * Configurable: You can override values in the "deployment file (BAR)" or at "run time".
   * Promoted: Elevates the property to the message flow level instead of the individual node level; the property value can then be changed at the message flow level. Also, in the "deployment file (BAR)" or at "run time".
 * Patterns: Catalog of IBM Integration Bus patterns is available on OT4I GitHub Pattern Repository.
-* Flow exerciser: Show the path that each message took.  View the structure and content of the logical message tree at any point in a message flow. Save recorded messages for replay.  Previously, you get such information by running debugger on the message flow.
+* Flow exerciser: 
+   - Show the path that each message took.  View the structure and content of the logical message tree at any point in a message flow. Save recorded messages for replay.  It is like a GUI for flow trace.
+   - Noe: The Flow exerciser cannot be used with a message flow that is defined in a REST API. (why?)
