@@ -41,4 +41,10 @@ These notes are a summary of IIB Dev 10 course.
       - Applications automatically recognize updates to shared library
       - Application deployment fails if a required shared library is not already deployed
       - Cannot remove a shared library from an integration server while deployed applications are referencing it
-    
+* Broker schemas (namespaces): subdirectory that provides a way to organize objects into a namespace to prevent duplicate names in the workspace. The namesapces is appended to the name of the object with "." as seperator in the integration node.
+* Message flow node properties:
+  * Mandatory: You must set values for these properties at "design time".
+  * Optional: You can set values for these properties at "design time"; otherwise, a default is used.
+  * Configurable: You can override values in the "deployment file (BAR)" or at "run time".
+  * Promoted: Elevates the property to the message flow level instead of the individual node level; the property value can then be changed at the message flow level. Also, in the "deployment file (BAR)" or at "run time".
+* Patterns: Catalog of IBM Integration Bus patterns is available on OT4I GitHub Pattern Repository.
