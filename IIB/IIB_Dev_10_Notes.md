@@ -63,3 +63,45 @@ Unit 4: Connecting to IBM MQ
 * MQInput nodes can receive messages from multiple queues on multiple queue managers.
 * Globally coordinated transaction control requires that MQInput and MQOutput nodes use same "local" queue manager. This queue manager is the global transaction manager, and no other IBM MQ resources can be used in the message flow.
 * You can specify a connection from an IBM MQ node to a specific local or remote queue manager by using connection properties on the node, including the destination queue manager name, host name, port, and channel. Alternatively, you can use an "MQEndpoint policy" to control the values of IBM MQ node connection properties at run time, or to specify an IBM MQ broker for event publication.
+* MQInput:
+  * At run time, the node does an “MQGet with wait” operation on the specified queue.
+  * It sets transaction mode for entire message flow
+  * Multiple MQInput nodes in a message flow identify alternative input sources.
+* MQOutput:
+  * Puts a message to the local or remote IBM MQ queue under transaction of message flow, or an explicit commit as defined by Transaction mode property.
+  * Destination mode:
+    - Queue Name (the default): sends message to queue that is identified in Queue name property.
+    - Reply To Queue: the message is sent to the queue that is identified in the ReplyToQ field in the MQMD. In this mode, it is similar to MQReply node.
+    - Destination List: the message is sent to the list of queues that are named in the "local environment" that is associated with the message.
+* MQReply:
+  * Puts the output message to the queue that the MQMD ReplyToQ field identifies in the message header.
+  * Transaction Mode property defines whether the message is written under sync point
+* MQGet:
+  * An MQGet node can be used anywhere within a message flow, unlike an MQInput node, which can be used only as the first node in a message flow.
+  * When using a synchronous request/reply pattern, the request message is sent by using an MQOutput node, and the reply would then be received in the same message flow with an MQGet node.
+  * The output message tree from an MQGet node is constructed by combining the input tree with the result tree from the MQGET call.
+  * Node properties that controls the shape of the output message: "Generate Mode", "Copy Message", "Copy local environment", "Output data location" and "Result data location".
+  * See page 174 of student notes and knowledge center: https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac20806_.html
+ 
+* Flexible IBM MQ Topologies:
+  * Single integration node can be connected to a single queue manager
+  * Multiple integration nodes can be connected to a single queue manager
+  * Queue manager can be local or remote from integration node
+* Some IBM Integration Bus features and implementations require IBM MQ server on the same system as the integration node, and that you specify a queue manager on the integration node:
+  * z/OS implementations: on z/OS only local queue managers are supported for IIB.
+  * Record and replay
+  * Global transaction management
+  * Event-driven processing nodes that are used for aggregation and timeout flows, message collections, and message sequences
+  * IBM MQ File Transfer Edition nodes
+  * IBM Sterling Connect: Direct nodes
+  * IBM Business Process Manager Advanced nodes that use IBM MQ bindings
+  * SAP nodes with transactional processing
+  * Integration nodes with HTTP listeners:
+     - The integration node listener requires access to IBM MQ Server, so you must install it if you want to use an integration node listener to manage HTTP messages in your HTTP or SOAP flows. However, if you use HTTP nodes or SOAP nodes with the integration server embedded listener, they do not require access to IBM MQ.
+     - For the difference between integration node listern and integration server embedded lister see:
+     https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/bc55270_.html
+  * HTTP proxy servlet
+  * High availability configurations
+  * Using accounting and statistics by using the web user interface and IBM MQ
+  
+    
