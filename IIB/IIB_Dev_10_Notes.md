@@ -55,4 +55,5 @@ These notes are a summary of IIB Dev 10 course.
   * If the BAR file contains a mixture of resources that are compiled and resources that are not compiled, you might see unexpected results.
   * The BAR file contains the broker.xml file. This file is called the deployment descriptor. This file, in XML format, is in the META-INF folder of the .zip file and can be modified by using a text editor or shell script.
   * When creating a new bar file in the toolkit, the BAR file is created in the "BarFiles" project by default. The default can be changed in preferences.
-
+  * If you elect to include source files in the BAR file (by selecting the option "Add workspace project source files" in the prepare tab), these resources are stored in a separate folder, which is named src in the bar file.
+* The IBM Integration web user interface is enabled and assigned to port 4414 by default.
