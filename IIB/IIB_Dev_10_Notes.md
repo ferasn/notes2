@@ -97,8 +97,8 @@ Unit 4: Connecting to IBM MQ
   * IBM Business Process Manager Advanced nodes that use IBM MQ bindings
   * SAP nodes with transactional processing
   * Integration nodes with HTTP listeners:
-     - The integration node listener requires access to IBM MQ Server, so you must install it if you want to use an integration node listener to manage HTTP messages in your HTTP or SOAP flows. However, if you use HTTP nodes or SOAP nodes with the integration server embedded listener, they do not require access to IBM MQ.
-     - For the difference between integration node listern and integration server embedded lister see:
+     - The integration node listener requires access to IBM MQ Server (it uses queues to queue requests for flows in integration servers to process (Explore?)), so you must install it if you want to use an integration node listener to manage HTTP messages in your HTTP or SOAP flows. However, if you use HTTP nodes or SOAP nodes with the integration server embedded listener, they do not require access to IBM MQ.
+     - For the difference between integration node listener and integration server embedded listener see:
      https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/bc55270_.html
   * HTTP proxy servlet
   * High availability configurations
