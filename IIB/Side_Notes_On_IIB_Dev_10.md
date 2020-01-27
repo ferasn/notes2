@@ -26,4 +26,4 @@ when the message nodes are accessed and referenced later in the flow, the messag
 
 IIB Toolkit Flow Excerciser:
 ============================
-* In Flow Exerciser, if you send a message through the flow and click "view path" to show the path and the message tree and it says "no data retrieved for this flow", it means that the message failed in the input node and did not propogate through any terminal.
+* In Flow Exerciser, if you send a message through the flow and click "view path" to show the path and the message tree and it says "no data retrieved for this flow", it means that the message failed in the input node and did not propogate through any terminal. One scenario where this could happen is if in the input node the parser could not parse the message (e.g. the parser is XMLNSC and message received is non-xml).
