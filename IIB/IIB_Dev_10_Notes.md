@@ -115,3 +115,14 @@ Unit 4: Connecting to IBM MQ
   * If the failure terminal is not connected, the message is put in the backout queue.
   * If the failure terminal is connected, the message is propogated to the failure path. If an error occurs in the failure terminal path, the message is retried until the "backout count" > 2 * "back threshold", then the message is put in the backout queue. (Explanatin: By the time the message is propogated to the failure terminal, the "backout count" has reached the "backout threshold", then the message is tried again as many as "backout threshold" and this is where 2 * "backout threshold" came from as the condition to check.
   * Note: the above holds if the message started a flow transaction (if transaction mode is 'Yes' or transaction mode is 'Automatic' and the message is persistent). Otherwise, the message is discarded it an error occurs and the error could not be handled.
+
+Unit 5: Controlling the flow of messages
+* Message assembly trees:
+  * Message tree (Root tree): contains representation of the message properties and content.
+  * Environment tree: for storing information while the message passes through the message flow.
+  * Local environment tree: that the input node creates to store variables that can be referred to and updated by message processing nodes that occur later in the message flow.
+  * Exception list tree contains message flow exception information
+* When an input node receives a message, a message assembly of four different message trees is created. While the parsed message is written into the Root tree, the other three trees are initially empty.
+* Leaf elements of the tree has both a label and a value. The data types that are supported in a leaf node come from a limited and simple set such as string, integer, and float.
+* Element values are stored in "Unicode" to facilitate code conversions.
+* Elements in the tree are addressed by using XPath or the dotted name notation.
