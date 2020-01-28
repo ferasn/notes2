@@ -5,6 +5,7 @@ Message Parsing:
 
 * Parse timing and validation:
     - Message Validation:
+      * Can be on input message or output message depending on the node type. See: https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac00400_.html
         a. "None": The default value. No validation is performed.
         b. "Content", "Content and Value" : are the same for SOAP, DFDL, and XMLNSC domains.  It makes a difference for MRM domain.
         c. "Inherit" : (The default for output nodes) available in some nodes other than input nodes. It inherites the validation properties of the input message.
@@ -51,7 +52,7 @@ Message Parsing:
     
     - Creating new parser and setting its properties and validation properties explicitly through "CREATE" statement in ESQL:
     https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ak04950_.html
-    Test: Check the impact of setting validation to "inherit" on the Compute node and the new parser validation properties are different from the input message. "inherit" by definition should make validation properties of the input message be the ones set for the new parser overriding the properties set in ESQL.
+    Test: Check if Compute Node validation options override the valiation options set using CREATE statement in ESQL.
     
 * Java Compute Node:
     - Whatever mentioned above for Compute node also applies to Java Compute Node.
