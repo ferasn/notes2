@@ -7,7 +7,7 @@ Message Parsing:
     - Message Validation:
         a. "None": The default value. No validation is performed.
         b. "Content", "Content and Value" : are the same for SOAP, DFDL, and XMLNSC domains.  It makes a difference for MRM domain.
-        c. "Inherit" : available in some nodes other than input nodes. It inherites the validation properties of the input message.
+        c. "Inherit" : (The default for output nodes) available in some nodes other than input nodes. It inherites the validation properties of the input message.
     - Parse Timing:
         a. "On Demand": (partial parsing) message is parsed as elements of the message are accessed.  Also, validation is done the same way.
         b. "Immediate", "Complete": are the same for all domains except MRM.  The whole message is parsed and validated (if validation is not "None").
@@ -48,16 +48,22 @@ Message Parsing:
     Reference: https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac70570_.html
     
     - Note: in "Compute Node", a statement like "SET OutputRoot.XMLNSC = InputRoot.XMLNSC" does not reference any element in the input message so if the input to "Compute Node" is an unparsed bitstream, this statement will not cause the bitstream to be parsed and the bitstream will be copied as is to OutputRoot. So, if you pass an invalid XML message like in the example test scenario above, it will pass through Compute Node to "out" terminal without causing parsing error.  However, if the parser is changed like "SET OutputRoot.JSON.Data = InputRoot.XMLNSC", this will cause current parser of input message to parse the whole message to produce the logical message tree in order for it to be copied to OutputRoot.  Here bitstream cannot be copied to OutputRoot because it will fail once JSON parser tries to parse XML bitstream later in the flow. So, the logical tree (which is indepedent from bitstream format) has to be constructed to be copied if parser is changed.
+    
+    - Creating new parser and setting its properties and validation properties explicitly through "CREATE" statement in ESQL:
+    https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ak04950_.html
+    Test: Check the impact of setting validation to "inherit" on the Compute node and the new parser validation properties are different from the input message. "inherit" by definition should make validation properties of the input message be the ones set for the new parser overriding the properties set in ESQL.
+    
+* Java Compute Node:
+    - Whatever mentioned above for Compute node also applies to Java Compute Node.
 
 
 * ResetContentDescriptor Node:
-   - It changes the parser for the input message.  A new parser gets associated with the message.
+   - It changes the parser properties and validation properties for the input message.  A new parser gets associated with the message.
    - There are two cases this node can encouter with regard to the input message:
         1. The message is unparsed and still in its bitstream form. Chaning the parser in this case is straightforward. This case does not have any performance penality.
         2. The message has been parsed and contents of the message changed, then this node has to recreate the bitstream from the message tree by using the current parser associated with the message.  If the content added to the message tree makes it invalid according the current parser and its model, then parser generates an error that it failed to serialize the message to bitstream and ResetContentDescriptor node raises an exception.  This case incurs performance overhead in serializing the message tree and converting it to bitstream.
    - In both cases, once bitstream is there, the way the message and its new parser work are the same as explained in input nodes above.  If ResetContentDescriptor node has parse timing "On Demand", the message propogates from this node to the next node in its bitstream form.  Later in the flow when the elements of the message are referenced, the parser set by this node starts parsing the message sufficiently enough for the reference.  If However parse timing is set otherwise, the message is parsed by this node and the logical message tree is propogated to the next node.
    - Note: this node does not do transformation. That means this node will not convert the message from XML to JSON by just changing the parser.  It only changes the parser.  What happens if one changes the parser from XML to JSON is that once the bitstream of XML message is recreated (if it is not alraedy in bitstream form), the JSON parser will try to parse it and will throw this error "A JSON parsing error occurred. A message that is not a valid JSON message was found in the input bit stream.".  So, for this node to work both the old parser and the new parser have to able to parse the same bitstream.  Example: from BLOB parser to XMLNSC parser.
-
 
 
 References:
