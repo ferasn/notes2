@@ -126,9 +126,3 @@ Unit 5: Controlling the flow of messages
 * Leaf elements of the tree has both a label and a value. The data types that are supported in a leaf node come from a limited and simple set such as string, integer, and float.
 * Element values are stored in "Unicode" to facilitate code conversions.
 * Elements in the tree are addressed by using XPath or the dotted name notation.
-
-
-References:
-================
-* This page in knowledge center about parsing strategies only exists in v9.0 documentation but not in later versions:
-https://www.ibm.com/support/knowledgecenter/en/SSMKHH_9.0.0/com.ibm.scenarios.doc/gop_03/topics/bj60039_.htm
