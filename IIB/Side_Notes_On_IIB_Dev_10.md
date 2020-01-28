@@ -14,7 +14,20 @@ when the message nodes are accessed and referenced later in the flow, the messag
         5. Deply the flow and put a text message "12345" in "IN.Q". This message is not a valid XML message. You will notice that the message appears in "OUT.Q".  This means that message just propagated in its bitstream form from "MQInput" to "MQOutput" node.  If it had been parsed in "MQInput", the parser would have thrown an error and the message would not propogate.
         6. Change the parse timing to "Complete" in "MQInput" and put the same message. You will notice that no message appears in "MQOutput" and the syslog (Event Viewer in Windows) logs the error "An XML parsing error ''An invalid XML character (Unicode: 0x54) was found in the prolog of the document".
     - Note: IIB Toolkit Flow Exerciser intercepts the message along the paths between nodes and does serialization of the message tree in order to able to display it to the user. This serialization involves full parsing of the message first if not already parsed. This changes the behaviour of the flow in case of "On Demand" parse timing as the message bitstream is fully parsed as soon as it leaves the input node and before it reaches the next node.  So, if you try the above test scenario in Flow Exerciser with "On Demand" parse timing, the parsing that occurs after the message bitstream leaves the "out" terminal of input node generates an error and this error goes back to the input node and is propogated to "catch" terminal if connected.
+    
+* Compute Node:
+   - Like Parser Copies: 
+     a. When a tree is copied between two parsers that are the same, for example in ESQL:
+       SET OutputRoot.XMLNSC.myTesData.Data = InputRoot.XMLNSC.myInputData.myData
+     b. In this case, the integration node can be certain that the tree can be fully represented by the target parser and so all parser information is copied. The information specific to the parser that is added to the elements (e.g. namespaces, types specific to the parser like : XMLNSC.XmlDeclaration, XMLNSC.Attribute, ..etc.)
+   - Unlike Parser Copies:
+     a. When you copy a tree between two different parsers, for example in ESQL:
+       SET OutputRoot.JSON.Data = InputRoot.XMLNSC;
+     b. In this case, the integration node cannot know whether the source tree can be fully represented by the target parser. This behavior is because parsers do not all support the same type of structure and content information. After an unlike parser copy, the target tree consists only of Name-Value pairs under the target parser with no other parser information (e.g. namespaces, types specific to the parser like : XMLNSC.XmlDeclaration, XMLNSC.Attribute, ..etc.).  So, an element that is an XMLNSC.Attribute in the tree of XMLNSC parser will be copied as a simple Name-Value element to tree of JSON parser.
+    Reference: https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac70570_.html
+    
     - Note: in "Compute Node", a statement like "SET OutputRoot.XMLNSC = InputRoot.XMLNSC" does not reference any element in the input message so if the input to "Compute Node" is an unparsed bitstream, this statement will not cause the bitstream to be parsed and the bitstream will be copied as is to OutputRoot. So, if you pass an invalid XML message like in the example test scenario above, it will pass through Compute Node to "out" terminal without causing parsing error.  However, if the parser is changed like "SET OutputRoot.JSON.Data = InputRoot.XMLNSC", this will cause current parser of input message to parse the whole message to produce the logical message tree in order for it to be copied to OutputRoot.  Here bitstream cannot be copied to OutputRoot because it will fail once JSON parser tries to parse XML bitstream later in the flow. So, the logical tree (which is indepedent from bitstream format) has to be constructed to be copied if parser is changed.
+
 
 * ResetContentDescriptor Node:
    - It changes the parser and its properties for the input message.  A new parser gets associated with the message.
