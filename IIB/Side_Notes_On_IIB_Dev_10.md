@@ -2,10 +2,31 @@ These notes are from the course but while going through the course and researchi
 
 Message Parsing:
 ===============
+
+* Parse timing and validation:
+    - Message Validation:
+        a. "None": The default value. No validation is performed.
+        b. "Content", "Content and Value" : are the same for SOAP, DFDL, and XMLNSC domains.  It makes a difference for MRM domain.
+        c. "Inherit" : available in some nodes other than input nodes. It inherites the validation properties of the input message.
+    - Parse Timing:
+        a. "On Demand": (partial parsing) message is parsed as elements of the message are accessed.  Also, validation is done the same way.
+        b. "Immediate", "Complete": are the same for all domains except MRM.  The whole message is parsed and validated (if validation is not "None").
+        
+* Validation Failure actions:
+    - Exception: The default value. An exception is thrown on the first validation failure encountered. The resulting exception list is shown below. The failure is also logged in the user trace if you have asked for user tracing of the message flow, and validation stops. Use this setting if you want processing of the message to halt as soon as a failure is encountered.
+    - Exception List : it does not stop at first validation excpetion but continues until current parsing is completed and generates a list of all validation exceptions and processing stops. Each failure is also logged in the user trace if you have asked for user tracing of the message flow. This property is affected by the Parse Timing property; when "On Demand" parsing is selected the current parsing operation parses only a portion of an input message, so only the validation failures in that portion of the message are reported.
+    - User Trace: Logs all validation failures to the user trace, even if you have not asked for user tracing of the message flow. Use this setting if you want processing of the message to continue regardless of validation failures.
+    - Local Error Log: Logs all validation failures to the error log (for example, syslog on Unix or the Event Log on Windows). Use this setting if you want processing of the message to continue regardless of validation failures.
+
+
+        
+* Every message carries with it two meta-data:
+  1. Parsing properties: The type of the parser (XMLNSC, DFDL, JSON, ..etc) and parser timing ( On Demand, Immeidate, Complete) .
+  2. Validation properties: Type of validation (None, Content, Content and Value) and validation failure actions.
+
 * Input Nodes:
-    - input node does not parse the message but set parser properties of the message if parse timing is "on-demand".
-when the message nodes are accessed and referenced later in the flow, the message is parsed up to the point needed to access the referenced message nodes.  With "on-demand" parsing, the message propagtes from input node in its bitstream form unparsed.
-    - However, if parse timing is set other than "on-demand", the parser properties are set and the message is parsed to build the logical message tree.
+    - "on-demand" parsing: input node does not parse the message but set parser properties for the message.  When the message elements are accessed and referenced later in the flow, the message is parsed up to the point needed to access the referenced message elements.  With "on-demand" parsing, the message propagtes from input node in its bitstream form unparsed. Also, input node sets the validation properties for the message if validation is specified (not "None").  Validation is performed "On-Demand" as parsing is taking place.  So, in this case, validation errors can be generated later in the flow as elements are accessed. This also has implications that validation errors might never be detected if a portion of the message is never parse.
+    - However, if parse timing is set other than "on-demand", the parser properties are set and the message is parsed to build the logical message tree. Also, validation properties are set for the message and validation is performed if specified (not "None").
     - Example Test Scenario:
         1. Create a message flow with two nodes: "MQInput" and "MQOutput"
         2. Connect "out" terminal of "MQInput" to "in" terminal of "MQOutput".
@@ -36,6 +57,7 @@ when the message nodes are accessed and referenced later in the flow, the messag
         2. The message has been parsed and contents of the message changed, then this node has to recreate the bitstream from the message tree by using the current parser associated with the message.  If the content added to the message tree makes it invalid according the current parser and its model, then parser generates an error that it failed to serialize the message to bitstream and ResetContentDescriptor node raises an exception.  This case incurs performance overhead in serializing the message tree and converting it to bitstream.
    - In both cases, once bitstream is there, the way the message and its new parser work are the same as explained in input nodes above.  If ResetContentDescriptor node has parse timing "On Demand", the message propogates from this node to the next node in its bitstream form.  Later in the flow when the elements of the message are referenced, the parser set by this node starts parsing the message sufficiently enough for the reference.  If However parse timing is set otherwise, the message is parsed by this node and the logical message tree is propogated to the next node.
    - Note: this node does not do transformation. That means this node will not convert the message from XML to JSON by just changing the parser.  It only changes the parser.  What happens if one changes the parser from XML to JSON is that once the bitstream of XML message is recreated (if it is not alraedy in bitstream form), the JSON parser will try to parse it and will throw this error "A JSON parsing error occurred. A message that is not a valid JSON message was found in the input bit stream.".  So, for this node to work both the old parser and the new parser have to able to parse the same bitstream.  Example: from BLOB parser to XMLNSC parser.
+
 
 
 References:
