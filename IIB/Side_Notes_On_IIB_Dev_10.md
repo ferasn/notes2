@@ -5,7 +5,8 @@ Message Parsing:
 
 * Parse timing and validation:
     - Message Validation:
-      * Can be on input message or output message depending on the node type. See: https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac00400_.html
+      * Validation done can be either on input message or output message depending on the node type. See: https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ac00400_.html
+      * The following options are available:
         a. "None": The default value. No validation is performed.
         b. "Content", "Content and Value" : are the same for SOAP, DFDL, and XMLNSC domains.  It makes a difference for MRM domain.
         c. "Inherit" : (The default for output nodes) available in some nodes other than input nodes. It inherites the validation properties of the input message.
