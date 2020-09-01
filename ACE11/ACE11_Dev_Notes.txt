@@ -2,3 +2,12 @@
   * Integration Node (also known as the integration broker): An integration node is a system service on Windows, a daemon process on UNIX, or a started task on z/OS. It controls processes that run message flows.
   * Integration Server: is a named grouping of message flows that are assigned to an integration node. Each integration server is started as a separate operating system process, providing an isolated runtime environment for a set of deployed message flows.
   * Message Flow Applications.
+
+- ACE 11 Changes:
+ * Getting the Most out of IIB and App Connect Enterprise (ACE)!:
+   https://www.mqtechconference.com/sessions_v2018/MQTC_2018_ACE_Getting_The_Most_final.pdf
+ * IBM App Connect EnterpriseTechnical Update:
+   https://docplayer.net/120739522-Amsterdam-ibm-app-connect-enterprise-technical-update-johan-thole-it-specialist-hybrid-cloud-integration.html
+   
+- ACE 11.0.0.10 New Features: https://community.ibm.com/community/user/imwuc/blogs/ben-thompson1/2020/08/26/exploreace11fixpack10?CommunityKey=77544459-9fda-40da-ae0b-fc8c76f0ce18&tab=recentcommunityblogsdashboard
+
