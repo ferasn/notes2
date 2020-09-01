@@ -1,0 +1,4 @@
+- Runtime Components:
+  * Integration Node: An integration node is a system service on Windows, a daemon process on UNIX, or a started task on z/OS. It controls processes that run message flows.
+  * Integration Server: is a named grouping of message flows that are assigned to an integration node. Each integration server is started as a separate operating system process, providing an isolated runtime environment for a set of deployed message flows.
+  * Message Flow Applications.
