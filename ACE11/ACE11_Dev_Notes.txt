@@ -15,5 +15,17 @@
   * Integration servers which exist independently and do not need an integration node definition.
   * “Unzip and go” deployment including support for generating pre-compiled BAR (broker archive) files carrying maps and message model schemas.
 
+- In slide 1-36: ODBC XA and JDBC/XA cannot be mixed on the same ACE Integration Server. (TODO: locate this information in knowledge center)
 
+- IBM MQ:
+ * Optional on distributed systems for most applications.  IBM MQ is required if certain operations are used.
+ * IBM MQ is required on z/OS for IBM App Connect Enterprise.
 
+- WebSphere extreme scale grids:
+ * Available as the embedded global cache within IBM App Connect Enterprise.
+ * Can connect and work with multiple external grids, and the embedded global cache at the same time.
+ * Configuration information to tell App Connect Enterprise how to locate the grid used to be held in a configurable service, but in ACEv11 this concept is replaced with a WXS Server Policy in a Policy Project.
+ * Interactions with external grids are logged in Activity Log and Resource Statistics in the same way as for the embedded global cache.
+ * WebSphere eXtreme Scale version 8.6 is supported. 
+ * Note: slide 1-38 mentions "WebSphere eXtreme Scale 8.6 grids must not have the XIO transport protocol enabled".  This an outdated statement XIO is now supported in the latest fix packs of IIB 10 and app connect enterprise v11 according to knowledge center.
+ 
