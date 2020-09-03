@@ -29,3 +29,7 @@
  * WebSphere eXtreme Scale version 8.6 is supported. 
  * Note: slide 1-38 mentions "WebSphere eXtreme Scale 8.6 grids must not have the XIO transport protocol enabled".  This an outdated statement XIO is now supported in the latest fix packs of IIB 10 and app connect enterprise v11 according to knowledge center.
  
+- IBM App Connect Enterprise and publish/subscribe support:
+ * ACE supports two types of publish/subscribe broker: MQTT and IBM MQ.
+ * A built-in MQTT broker is provided with IBM App Connect Enterprise, and MQTT publication is enabled by default for all events that the integration node generates, except for business events. You can specify an alternative MQTT broker if you choose not to use the built-in MQTT broker.
+ * If you installed IBM MQ, you can use the IBM MQ publish/subscribe broker that is provided with IBM MQ.
