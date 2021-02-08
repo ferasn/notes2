@@ -7,4 +7,7 @@ IBM MQ provides:
 2. Messages contain:
   a) message descriptor (MQMD) header with message control information. The application that puts the messages on the queue sets some of the fields in the message descriptor; the queue manager sets others on behalf of the application.
   b) optional additional headers
-  b) applicaiton data or payload
+  c) applicaiton data or payload
+3. Message Persistence: persistence is specified by the application in MQMD
+  a) Persistent messages: Queue manager keeps a failure-tolerant recovery log of all actions on messages. These message are recoverable after MQ restarts.
+  b) Non-persistent messages: Stored in system memory only. Discarded after MQ restarts. Used when data loss is tolerable and performance is more important.
