@@ -35,3 +35,8 @@ IBM MQ provides:
   a) IBM MQ and IBM MQ Advanced.
   b) IBM MQ Appliance: MQ in a physical appliance with premium hardware including SSDs. Pre-optimized for simple setup and easy maintenance with firmeware updates.
   c) IBM MQ Cloud Options: Plug into a range of services on IBM’s PaaS, IBM Bluemix with IBM Message Hub.  Access repeatable solutions, with IBM MQ on PureApplication and SoftLayer and other Cloud and virtualized environments.
+9. IBM MQ Advanced:
+  a) IBM MQ + managed file transfer, advanced message security and telemetry (MQTT).
+  
+
+Unit 2 IBM MQ Installation and Deployment Options:
