@@ -1,4 +1,3 @@
-* MQ Connections:
-  1. Two types:
-    a) Server connection: connection made through IPC binding.
-    b) Client connection: 
+* MQ Buffers and Files
+* Setting Q buffer size.
+* How MQ Clustering works: Files/MQ Clustering.pdf
