@@ -7,4 +7,8 @@
 
 * Server channel sharing converstation
 
-* Server channel statuses
+* A channel can be in two states:
+  1- Inactive
+  2- Current.  This state has substates: Stopped, Starting, Retrying, Active.  So a CURRENT channel is ACTIVE unless it is in RETRYING, STOPPED, or STARTING state.
+    The seven possible states of an active channel (INITIALIZING, BINDING, SWITCHING, REQUESTING, RUNNING, PAUSED, or STOPPING).  When a channel is active, it is consuming resource and a process or thread is running.
+    ... MAXchannels MAXActiveChannels....
