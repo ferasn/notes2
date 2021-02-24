@@ -5,4 +5,4 @@
   2. Files/MQTC_v2018_Clustering.pdf
 
 
-* Default objects created by MQ and their purpose: https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.2.0/com.ibm.mq.ref.con.doc/q081590_.html
+* System and default objects created by MQ and their purpose: https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.2.0/com.ibm.mq.ref.con.doc/q081590_.html
