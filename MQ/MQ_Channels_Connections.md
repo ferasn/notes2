@@ -40,3 +40,6 @@
 
 
 * In-doubt channels and channel sequence numbers:
+
+
+* a persistent message may be lost if GOT outside a syncpoint.  If the message is removed from queue but a crash happens before app receices the message
