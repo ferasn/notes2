@@ -23,3 +23,5 @@
      - FAST (Default value): Nonpersistent messages on a channel are not transferred within transactions. No acknowledgement. The advantage is speed. The disadvatnage is messages might be lost if there is a transmission failure or if the channel stops when the messages are in transit.
 
 * The queue that holds the synchronization data for channels is SYSTEM.CHANNEL.SYNCQ
+
+* In-doubt channels and channel sequence numbers:
