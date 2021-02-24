@@ -24,4 +24,8 @@
 
 * The queue that holds the synchronization data for channels is SYSTEM.CHANNEL.SYNCQ
 
+* Stopping a receiver channel: it is stuck waiting to a message from sender.  Two ways to get this message:
+  1. The sender sends a message batch
+  2. The sedner sends a heartbeat
+
 * In-doubt channels and channel sequence numbers:
