@@ -18,6 +18,8 @@
 
 
 * Channel properties: 
-  1. Nonpersistent message speed (NPMSPEED): This property applies to all channel types that trasmit messages between queue managers. It is not applicable to Server-connection channels.
+  1. Nonpersistent message speed (NPMSPEED): This property applies to all channel types (senders and receivers) that trasmit messages between queue managers. It is not applicable to Server-connection channels.
      - NORMAL: Nonpersistent messages on a channel are transferred within transactions. Message delivery between queue managers is acknowledged. No message is lost in transit.
      - FAST (Default value): Nonpersistent messages on a channel are not transferred within transactions. No acknowledgement. The advantage is speed. The disadvatnage is messages might be lost if there is a transmission failure or if the channel stops when the messages are in transit.
+
+* The queue that holds the synchronization data for channels is SYSTEM.CHANNEL.SYNCQ
