@@ -19,13 +19,20 @@
 
 * Channel properties: 
   1. Nonpersistent message speed (NPMSPEED): This property applies to all channel types (senders and receivers) that trasmit messages between queue managers. It is not applicable to Server-connection channels.
-     - NORMAL: Nonpersistent messages on a channel are transferred within transactions. Message delivery between queue managers is acknowledged. No message is lost in transit.
-     - FAST (Default value): Nonpersistent messages on a channel are not transferred within transactions. No acknowledgement. The advantage is speed. The disadvatnage is messages might be lost if there is a transmission failure or if the channel stops when the messages are in transit.
+     - NORMAL: Nonpersistent messages on a channel are transferred within transactions.  No message is lost in transit.
+     - FAST (Default value): Nonpersistent messages on a channel are not transferred within transactions.  unit of work, syncpoint, transaction
 
 * The queue that holds the synchronization data for channels is SYSTEM.CHANNEL.SYNCQ
 
 * Stopping a receiver channel: it is stuck waiting to a message from sender.  Two ways to get this message:
   1. The sender sends a message batch
   2. The sedner sends a heartbeat
+
+* Sender channel "retry" vs receiver channel "message retry"
+
+* How to simulator in-doubt sender channel? using three queues and the third queue with depth 1 and sending messages to the three queues in sequence and makding batch size three.  When the third message (the last in the batch) is sent by sender channel, it start the confirm flow and enters in-doubt.  The receiver upon receiving the thrid message will fail to put the message in thrid queue and enters "message" retry loop. 
+
+* Channel parameters that negotiated:
+  1. heartbeat: the max value of both sender and receiver is taken.
 
 * In-doubt channels and channel sequence numbers:
