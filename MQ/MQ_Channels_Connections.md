@@ -45,3 +45,10 @@
 
 
 * a persistent message may be lost if GOT outside a syncpoint.  If the message is removed from queue but a crash happens before app receices the message
+
+
+--------
+message duplication case: if you resolve channel rollback and reset channel sequence number
+
+NPMSPEED: FAST sender channel gets non-persistent messages outside of a transaction (syncpoint). In case, the batch contains persistent and non-persistent messages, only persistent message are GET in a syncpoint.   If the channel becomes in-doubt and resolved to back-out, the transaction of the batch is backed-out and persistent messages are available again in the queue.  Non-persistent message outside of syncpoint are destructively read by channel MCA and are permanently lost if the remote MCA failed to write them to their destination queues.
+----------
