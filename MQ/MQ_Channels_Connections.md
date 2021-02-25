@@ -51,4 +51,16 @@
 message duplication case: if you resolve channel rollback and reset channel sequence number
 
 NPMSPEED: FAST sender channel gets non-persistent messages outside of a transaction (syncpoint). In case, the batch contains persistent and non-persistent messages, only persistent message are GET in a syncpoint.   If the channel becomes in-doubt and resolved to back-out, the transaction of the batch is backed-out and persistent messages are available again in the queue.  Non-persistent message outside of syncpoint are destructively read by channel MCA and are permanently lost if the remote MCA failed to write them to their destination queues.
+
+if a batch contains only non-persistent messages and NPMSPEED is FAST, the sender channel never becomes in-doubt on this batch because there is no unit-of-work started for the batch. Also, the sequence number is updated to the latest one regardless of the status of the batch at the receiver channel.
 ----------
+
+Test two scenarios with Receiver failing to put message to detination queue:
+1- message batch is GET in a transaction (either the messages are persistent or NPMSPEED is NORMAL). What happens if destination fails to put messages to queue and retry attemps are exhausted.
+2- message batch is GET in a transaction (either the messages are persistent or NPMSPEED is NORMAL). What happens if destination fails to put messages to queue and sender channel is stopped before retry attempts are exhausted.
+3- message batch is GET without a transaction (batch are all non-persistent messages and NPMSPEE is FAST).  What happens if destination fails to put messages to queue and retry attemps are exhausted.
+
+Test two scenarios with Receiver failing to put message to destination queue but eventually succeeds after sender is stopped so receiver could not confirm to sender:
+1- message batch is GET in a transaction (either the messages are persistent or NPMSPEED is NORMAL). : Sender channel is in-doubt and sequence number is not the same beteween sender and receiver.  What happens when sender is started again? in-doubt is resolved automatically and sequence number is updatd.
+2- message batch is GET in a transaction (either the messages are persistent or NPMSPEED is NORMAL). : Sender channel is in-doubt and sequence number is not the same beteween sender and receiver.  What happens when sender is resolved to backout and then sender is started? 
+3- message batch is GET without a transaction (batch are all non-persistent messages and NPMSPEE is FAST). : Sender does not become in-doubt and sequence number is updated to the latest. What happens when sender is started again?
