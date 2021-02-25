@@ -10,4 +10,4 @@
 * References to MQ Internals:
   1. Persistent Messaging Performance in IBM MQ for Linux: https://ibm-messaging.github.io/mqperf/mqio_v1.pdf
   2. IBM MQ V8.0 for Windows - Performance Report: https://www.ibm.com/support/pages/node/582347
-  3. The Do’s and Don'ts of Queue Manager Performance: 
+  3. The Do’s and Don'ts of Queue Manager Performance: Files/Queue Manager Performance.pdf
