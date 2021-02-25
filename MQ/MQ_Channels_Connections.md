@@ -24,6 +24,8 @@
 
 * The queue that holds the synchronization data for channels is SYSTEM.CHANNEL.SYNCQ
 
+* Stopping a distributed QM sender channel to "INACTIVE" state does not inhibit the transmission queue and the messages in transmission queue are browsable.
+* Stopping a distributed QM sender channel to "STOPPED" (disabled) inihibts "GET" of transmission queue and the queue is not browsable.
 * Stopping a receiver channel: it is stuck waiting to a message from sender.  Two ways to get this message:
   1. The sender sends a message batch
   2. The sedner sends a heartbeat
