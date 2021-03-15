@@ -7,6 +7,10 @@
 
 * System and default objects created by MQ and their purpose: https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.2.0/com.ibm.mq.ref.con.doc/q081590_.html
 
+* IBM MQ Linux and AIX process priority: https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.2.0/com.ibm.mq.pla.doc/q005920_.html
+
+* Use persistent messages in syncpoint to optimize performance.  Reference: https://ibm-messaging.github.io/mqperf/mqio_v1.pdf
+
 * References to MQ Internals and Performance:
   1. Persistent Messaging Performance in IBM MQ for Linux: https://ibm-messaging.github.io/mqperf/mqio_v1.pdf
   2. IBM MQ V8.0 for Windows - Performance Report: https://www.ibm.com/support/pages/node/582347
