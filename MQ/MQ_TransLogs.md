@@ -11,6 +11,16 @@
   
 * Hardening messages: means writing them to the recovery log.
 
+* Transaction log Triple write:
+  1- Log records are written to pages of size 4k. The log buffer and file are organized into pages of 4k. When a transaction (or transactions) commit, the log buffer pages are written to log file (hardened).
+  2- The last page may be not be full of log records and still has free space.  Still, the whole page is written to log file.
+  3- New transactions will fill the empty space in this partially full page.  When those transactions commit, this page has be written once again to the log file replacing the old page.
+  4- This situation presents a problem: if the storage cannot guarantee writing the 4k page to persistent storage atomically (that is either all of the 4k page is written or none.  Prtial writing can corrupt the data in the page as in the case when mechanical disk writes 4k data as a series of 512 sector writes), the log records of previously committed transactions int the page are corrupted and not recoverable.
+  5- This is why triple write is employed just for the case of this last 4k page.
+  References:
+    1- https://www.ibm.com/developerworks/websphere/library/techarticles/0712_dunn/0712_dunn.html
+    2- MQTC_v2016_More_Mysteries_of_the_IBM_MQ_Logger_final.pdf
+
 Resources:
 1. MQTC_v2016_More_Mysteries_of_the_IBM_MQ_Logger_final.pdf
 2. MQTC_2017_Whats_New_in_MQ_Logging.pdf
