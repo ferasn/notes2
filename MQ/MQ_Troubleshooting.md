@@ -1,6 +1,6 @@
 * https://www.ibm.com/support/pages/which-mq-process-indication-active-instance-running-multi-instance-queue-manager
 * https://www.ibm.com/support/pages/node/219139
-* mqconfig: Check if opearting system meets minimum MQ requirements
+* mqconfig: Check if opearting system configuration meet MQ requirements
 * runmqras: Gather diagnostic information together into a single archive, for example to submit to IBM Support. https://www.ibm.com/support/pages/read-first-collect-ibm-mq-mustgather-data-linux-unix-windows-and-ibm-i
 * https://www.ibm.com/support/pages/there-way-summarize-contents-fdc-files-yes-using-mq-utility-ffstsummary
 * https://www.ibm.com/support/pages/ibm-mq-error-log-ffst-and-dump-locations
