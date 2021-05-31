@@ -7,3 +7,11 @@ Exception reason: CWSIK0035E: A message cannot be delivered to destination sca/R
 
 This exception means that there is a problem with the messaging engine preventing the message from being put on the destination queue
 (sca/Reconciliation).  Look at messaging engine logs to find out the problem.
+
+* Invocation activity that is asynchronous uses SIBus destinations of the module to send the request.  The activity failes with this error "com.ibm.websphere.sca.ServiceRuntimeException - Send destination invalid.", then check
+if the SIBus security is enabled and the application has the right role mapped to its jms resource references.
+Note: when this issue happened, nothing was written to the logs. Try to reproduce it and investigate which compoenent log level needs to be increased to catch the root cause.
+
+* Resources:
+- BPM engine queues:
+https://www.ibm.com/support/pages/what-purpose-and-how-can-we-cleanup-different-exception-queues-wbifailedevent-bpehldqueue-systemexceptiondestination
